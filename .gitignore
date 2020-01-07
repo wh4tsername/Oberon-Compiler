@@ -1,0 +1,16 @@
+
+.idea/
+
+cmake-build-debug/
+
+CMakeFiles/
+
+CMakeCache.txt
+
+CMakeLists.txt
+
+cmake_install.cmake
+
+Makefile.txt
+
+Oberon_Compiler.cbp

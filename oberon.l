@@ -1,0 +1,45 @@
+%{
+	#include <stdlib.h>
+	#include <string.h>
+	#include <stdio.h>
+	#include "declaration.h"
+%}
+
+IDENT [a-zA-Z][_a-zA-Z0-9]*
+NUMBER (-?[1-9][0-9]*)|0
+REAL ((-?[1-9][0-9]*.[0-9]*)|0)
+
+%option noyywrap
+
+%%
+"MODULE"    { return MODULE; }
+"IMPORT"    { return IMPORT; }
+"VAR"       { return VAR; }
+"BEGIN"     { return T_BEGIN; }
+"END"       { return END; }
+"PRINT"     { return PRINT; }
+"IF"        { return IF; }
+"THEN"      { return THEN; }
+"ELSE"      { return ELSE; }
+"ELSIF"     { return ELSIF; }
+"="         { return 4; }
+"<"         { return 0; }
+">"         { return 2; }
+"<="        { return 1; }
+">="        { return 3; }
+"+"         { return -1; }
+"-"         { return -2; }
+"/"         { return -3; }
+"("         { return '('; }
+")"         { return ')'; }
+" "         { /* space - do nothing */ }
+";"         { return ';'; }
+"."         { return '.'; }
+":="        { /* assigment - do nothing */}
+"\t"        { /* tab symbol - do nothing */ }
+{IDENT}     { return IDENT; }
+{NUMBER}    { return NUMBER; }
+{REAL}      { return REAL; }
+.           { printf("Lexical error\n"); exit(1); }
+
+%%

@@ -4,6 +4,8 @@
     #include "declaration.h"
     #include "expressions.h"
     #include "variables.h"
+
+    #define YYERROR_VERBOSE 1
 %}
 
 %union {
@@ -39,6 +41,7 @@
 %token END
 %token T_INTEGER
 %token T_REAL
+%token ASSIGNMENT_SYMBOL
 
 %type <expression> expression
 %type <logical_expression> logic_expression
@@ -66,7 +69,7 @@ declaration:
 	| IDENT ':' T_REAL {variables_container.Add($1);};
 
 statement_sequence: 
-	statement_sequence ';' statement delimeter {} 
+	statement_sequence statement ';' delimeter {}
 	| {$$ = new ListOfStatements;};
 
 delimeter:
@@ -74,8 +77,8 @@ delimeter:
 	| {};
 
 statement: 
-	IDENT ":=" expression {$$ = new AssignStatement($1, $3);}
-	| PRINT expression {}
+	IDENT ASSIGNMENT_SYMBOL expression {$$ = new AssignStatement($1, $3);}
+	| PRINT expression {$$ = new PrintStatement($2);}
 	| if_statement {}
 	| {};
 

@@ -6,8 +6,8 @@
 %}
 
 IDENT [a-zA-Z][_a-zA-Z0-9]*
-NUMBER (-?[1-9][0-9]*)|0
-REAL ((-?[1-9][0-9]*.[0-9]*)|0)
+NUMBER ([1-9][0-9]*)|0
+REAL (([1-9][0-9]*)|0)\.[0-9]*
 
 %option noyywrap
 
@@ -38,11 +38,11 @@ REAL ((-?[1-9][0-9]*.[0-9]*)|0)
 ";"         { return ';'; }
 ":"         { return ':'; }
 "."         { return '.'; }
-":="        { /* assigment - do nothing */}
+":="        { return ASSIGNMENT_SYMBOL; }
 "\t"        { /* tab symbol - do nothing */ }
-{IDENT}     { return IDENT; }
-{NUMBER}    { return NUMBER; }
-{REAL}      { return REAL; }
+{IDENT}     { strcpy(yylval.id_name, yytext); return IDENT; }
+{NUMBER}    { yylval.int_value = atoi(yytext); return NUMBER; }
+{REAL}      { yylval.double_value = atof(yytext); return REAL; }
 .           { printf("Lexical error\n"); exit(1); }
 
 %%

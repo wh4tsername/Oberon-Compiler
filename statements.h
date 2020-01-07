@@ -4,6 +4,8 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <cstdlib>
+#include <iostream>
 #include "expressions.h"
 #include "variables.h"
 
@@ -24,7 +26,7 @@ class ListOfStatements {
 class PrintStatement : public Statement {
   Expression* __expression__;
  public:
-  PrintStatement(Expression* expression):
+  PrintStatement(Expression* expression) :
       __expression__(expression) {}
   void run() final;
 };

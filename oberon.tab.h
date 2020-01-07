@@ -61,7 +61,8 @@ extern int yydebug;
     T_BEGIN = 271,
     END = 272,
     T_INTEGER = 273,
-    T_REAL = 274
+    T_REAL = 274,
+    ASSIGNMENT_SYMBOL = 275
   };
 #endif
 
@@ -70,7 +71,7 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 9 "oberon.y" /* yacc.c:1909  */
+#line 11 "oberon.y" /* yacc.c:1909  */
 
     Expression* expression;
     LogicalExpression* logical_expression;
@@ -82,7 +83,7 @@ union YYSTYPE
     
     char id_name[256];
 
-#line 86 "oberon.tab.h" /* yacc.c:1909  */
+#line 87 "oberon.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

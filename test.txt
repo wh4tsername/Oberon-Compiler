@@ -1,6 +1,7 @@
 MODULE a;
 IMPORT;
 VAR b: INTEGER;
-    c: INTEGER;
 BEGIN
+b := 1;
+PRINT b;
 END a.

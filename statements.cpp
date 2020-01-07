@@ -1,16 +1,27 @@
 #include "statements.h"
 #include "errors.h"
 #include "variables.h"
-#include <cstdlib>
 
 void ListOfStatements::run() {
-  for (auto element: __list__) {
+  for (auto element : __list__) {
+    std::cout << "hi";
     element->run();
   }
 }
 
 void ListOfStatements::add(Statement* state) {
-  __list__.push_back(state);
+  std::cout << "hi";
+  __list__.emplace_back(state);
+}
+
+void PrintStatement::run() {
+  if (!__expression__) {
+    exit(NULL_POINTER_ERROR);
+  }
+
+  std::cout << "hi";
+
+  std::cout << __expression__->Count();
 }
 
 void IfStatement::run() {

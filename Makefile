@@ -1,7 +1,7 @@
 all: oberon
 
 oberon.tab.c oberon.tab.h: oberon.y
-	bison -d oberon.y
+	bison -d --graph --verbose oberon.y
 
 lex.yy.c: oberon.l
 	flex oberon.l

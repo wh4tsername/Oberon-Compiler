@@ -59,7 +59,9 @@ extern int yydebug;
     IMPORT = 269,
     VAR = 270,
     T_BEGIN = 271,
-    END = 272
+    END = 272,
+    T_INTEGER = 273,
+    T_REAL = 274
   };
 #endif
 
@@ -80,7 +82,7 @@ union YYSTYPE
     
     char id_name[256];
 
-#line 84 "oberon.tab.h" /* yacc.c:1909  */
+#line 86 "oberon.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

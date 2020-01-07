@@ -1,5 +1,6 @@
 MODULE a;
-IMPORT ;
-VAR    b: INTEGER;
+IMPORT;
+VAR b: INTEGER;
+    c: INTEGER;
 BEGIN
 END a.

@@ -20,10 +20,8 @@ void IfStatement::run() {
 
   if (static_cast<bool>(__expression__->Count())) {
     __state1__->run();
-  } else {
-    if (__state2__) {
+  } else if (__state2__) {
       __state2__->run();
-    }
   }
 }
 

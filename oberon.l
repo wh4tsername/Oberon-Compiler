@@ -22,6 +22,8 @@ REAL ((-?[1-9][0-9]*.[0-9]*)|0)
 "THEN"      { return THEN; }
 "ELSE"      { return ELSE; }
 "ELSIF"     { return ELSIF; }
+"INTEGER"   { return T_INTEGER; }
+"REAL"      { return T_REAL; }
 "="         { return 4; }
 "<"         { return 0; }
 ">"         { return 2; }
@@ -34,6 +36,7 @@ REAL ((-?[1-9][0-9]*.[0-9]*)|0)
 ")"         { return ')'; }
 " "         { /* space - do nothing */ }
 ";"         { return ';'; }
+":"         { return ':'; }
 "."         { return '.'; }
 ":="        { /* assigment - do nothing */}
 "\t"        { /* tab symbol - do nothing */ }

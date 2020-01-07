@@ -10,7 +10,7 @@ class VariablesContainer {
  public:
   VariablesContainer() = default;
 
-  void Add(const std::string& variable_name, double value);
+  void Add(const std::string& variable_name, double value = 0);
 
   double Get(const std::string& variable_name);
 

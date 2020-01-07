@@ -37,6 +37,8 @@
 %token VAR
 %token T_BEGIN
 %token END
+%token T_INTEGER
+%token T_REAL
 
 %type <expression> expression
 %type <logical_expression> logic_expression
@@ -46,7 +48,7 @@
 %%
 
 module:
-	MODULE IDENT ';' IMPORT import_list ';' VAR declaration_sequence ';' program END IDENT '.' {};
+	MODULE IDENT ';' IMPORT import_list ';' VAR declaration_sequence program END IDENT '.' {};
 
 program: 
 	T_BEGIN statement_sequence {}
@@ -56,20 +58,19 @@ import_list:
 	{};
 
 declaration_sequence: 
-	declaration_sequence ';' declaration delimeter {}
+	declaration_sequence declaration ';' delimeter {}
 	| {};
 
 declaration:
-	IDENT ':' NUMBER {variables_container.Add($1, $3);}
-	| IDENT ':' REAL {variables_container.Add($1, $3);};
+	IDENT ':' T_INTEGER {variables_container.Add($1);}
+	| IDENT ':' T_REAL {variables_container.Add($1);};
 
 statement_sequence: 
 	statement_sequence ';' statement delimeter {} 
 	| {$$ = new ListOfStatements;};
 
 delimeter:
-	'\n' {}
-	| delimeter '\n' {}
+	delimeter '\n' {}
 	| {};
 
 statement: 

@@ -43,6 +43,8 @@
 %token T_INTEGER
 %token T_REAL
 %token ASSIGNMENT_SYMBOL
+%token T_LE T_GE
+%token T_AND T_OR T_NOT
 
 %type <expression> expression
 %type <logical_expression> logic_expression
@@ -95,15 +97,15 @@ elsif_statement:
 	| {};
 
 logic_expression: 
-	expression "<" expression {$$ = new LogicalExpression(0, $1, $3);}
-	| expression ">" expression {$$ = new LogicalExpression(2, $1, $3);}
-	| expression "<=" expression {$$ = new LogicalExpression(1, $1, $3);}
-	| expression ">=" expression {$$ = new LogicalExpression(3, $1, $3);}
-	| expression "=" expression {$$ = new LogicalExpression(4, $1, $3);}
-	| expression "#" expression {$$ = new LogicalExpression(5, $1, $3);}
-	| expression "AND" expression {$$ = new LogicalExpression(6, $1, $3);}
-	| expression "OR" expression {$$ = new LogicalExpression(7, $1, $3);}
-	| "NOT" expression %prec NOT {$$ = new LogicalExpression(8, $2, NULL);}
+	expression '<' expression {$$ = new LogicalExpression(0, $1, $3);}
+	| expression '>' expression {$$ = new LogicalExpression(2, $1, $3);}
+	| expression T_LE expression {$$ = new LogicalExpression(1, $1, $3);}
+	| expression T_GE expression {$$ = new LogicalExpression(3, $1, $3);}
+	| expression '=' expression {$$ = new LogicalExpression(4, $1, $3);}
+	| expression '#' expression {$$ = new LogicalExpression(5, $1, $3);}
+	| expression T_AND expression {$$ = new LogicalExpression(6, $1, $3);}
+	| expression T_OR expression {$$ = new LogicalExpression(7, $1, $3);}
+	| T_NOT expression %prec NOT {$$ = new LogicalExpression(8, $2, NULL);}
 	;
 
 expression:

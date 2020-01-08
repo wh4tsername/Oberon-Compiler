@@ -24,14 +24,17 @@ REAL (([1-9][0-9]*)|0)\.[0-9]*
 "ELSIF"     { return ELSIF; }
 "INTEGER"   { return T_INTEGER; }
 "REAL"      { return T_REAL; }
-"="         { return 4; }
-"<"         { return 0; }
-">"         { return 2; }
-"<="        { return 1; }
-">="        { return 3; }
-"+"         { return -1; }
-"-"         { return -2; }
-"/"         { return -3; }
+"="         { return '='; }
+"<"         { return '<'; }
+">"         { return '>'; }
+"<="        { return LE; }
+">="        { return GE; }
+"AND"       { return AND; }
+"OR"        { return OR; }
+"NOT"       { return NOT; }
+"+"         { return '+'; }
+"-"         { return '-'; }
+"/"         { return '/'; }
 "("         { return '('; }
 ")"         { return ')'; }
 " "         { /* space - do nothing */ }

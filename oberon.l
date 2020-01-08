@@ -35,6 +35,7 @@ REAL (([1-9][0-9]*)|0)\.[0-9]*
 "+"         { return '+'; }
 "-"         { return '-'; }
 "/"         { return '/'; }
+"*"         { return '*'; }
 "("         { return '('; }
 ")"         { return ')'; }
 " "         { /* space - do nothing */ }

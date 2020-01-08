@@ -22,6 +22,7 @@ double ArithmeticExpression::Count() {
         std::cerr << "Runtime error: division by zero" << std::endl;
         exit(RUNTIME_ERROR);
       }
+      return lhs_value / rhs_value;
     case ArithmeticOperation::UMINUS_:
       return -lhs_value;
   }

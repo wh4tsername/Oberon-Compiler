@@ -4,7 +4,8 @@ VAR b: INTEGER;
     c: INTEGER;
     d: INTEGER;
 BEGIN
-b := 1337;
-c := 228;
-PRINT c + b;
+b := 3;
+c := 2;
+d := 10;
+PRINT (-5) * (-c * b) / (-d);
 END a.

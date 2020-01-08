@@ -4,13 +4,14 @@
 #include <string>
 #include "statements.h"
 
+class Statement;
 class ListOfStatements;
 
 class VariablesContainer {
  public:
   VariablesContainer() = default;
 
-  void Add(const std::string& variable_name, double value = 0);
+  void Add(const std::string& variable_name, double value);
 
   double Get(const std::string& variable_name);
 
@@ -20,5 +21,5 @@ class VariablesContainer {
   std::map<std::string, double> variables;
 };
 
-static VariablesContainer variables_container;
+extern VariablesContainer variables_container;
 extern ListOfStatements* program;

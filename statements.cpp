@@ -3,14 +3,12 @@
 #include "variables.h"
 
 void ListOfStatements::run() {
-  for (auto element : __list__) {
-    std::cout << "hi";
+  for (auto&& element : __list__) {
     element->run();
   }
 }
 
 void ListOfStatements::add(Statement* state) {
-  std::cout << "hi";
   __list__.emplace_back(state);
 }
 
@@ -18,8 +16,6 @@ void PrintStatement::run() {
   if (!__expression__) {
     exit(NULL_POINTER_ERROR);
   }
-
-  std::cout << "hi";
 
   std::cout << __expression__->Count();
 }

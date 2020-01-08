@@ -932,7 +932,7 @@ YY_RULE_SETUP
 case 32:
 YY_RULE_SETUP
 #line 46 "oberon.l"
-{ printf("Lexical error\n"); exit(1); }
+{ printf("Lexical error: %s\n", yytext); exit(1); }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP

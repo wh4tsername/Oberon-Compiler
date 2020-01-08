@@ -5,4 +5,4 @@
 #include "oberon.tab.h"
 
 int yylex();
-void yyerror(std::string s);
+void yyerror(const std::string& s);

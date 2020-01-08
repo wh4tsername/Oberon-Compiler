@@ -11,7 +11,7 @@ extern FILE* yyin;
 extern VariablesContainer variables_container;
 ListOfStatements* program;
 
-void yyerror(std::string string) {
+void yyerror(const std::string& string) {
   std::cerr << "Parser error: " << string << std::endl;
 }
 
@@ -29,7 +29,6 @@ int main(int argc, char** argv) {
 
   yyin = handle;
   yyparse();
-  std::cout << "hey";
   program->run();
 
   return 0;

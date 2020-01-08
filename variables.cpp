@@ -18,3 +18,5 @@ bool VariablesContainer::Exists(
     const std::string& variable_name) {
   return variables.count(variable_name) > 0;
 }
+
+VariablesContainer variables_container;

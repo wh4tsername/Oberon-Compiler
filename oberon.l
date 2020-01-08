@@ -43,6 +43,6 @@ REAL (([1-9][0-9]*)|0)\.[0-9]*
 {IDENT}     { strcpy(yylval.id_name, yytext); return IDENT; }
 {NUMBER}    { yylval.int_value = atoi(yytext); return NUMBER; }
 {REAL}      { yylval.double_value = atof(yytext); return REAL; }
-.           { printf("Lexical error\n"); exit(1); }
+.           { printf("Lexical error: %s\n", yytext); exit(1); }
 
 %%

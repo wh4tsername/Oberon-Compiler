@@ -1,7 +1,9 @@
 MODULE a;
 IMPORT;
 VAR b: INTEGER;
+    c: INTEGER;
+    d: INTEGER;
 BEGIN
-b := 1;
+b := 1337;
 PRINT b;
 END a.

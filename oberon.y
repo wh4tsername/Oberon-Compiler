@@ -21,6 +21,7 @@
 }
 
 %left '+' '-'
+
 %left '*' '/'
 
 %nonassoc UMINUS
@@ -54,7 +55,7 @@ module:
 	MODULE IDENT ';' IMPORT import_list ';' VAR declaration_sequence program END IDENT '.' {};
 
 program: 
-	T_BEGIN statement_sequence {}
+	T_BEGIN statement_sequence {program = $2;}
 	| {};
 
 import_list: 
@@ -65,11 +66,11 @@ declaration_sequence:
 	| {};
 
 declaration:
-	IDENT ':' T_INTEGER {variables_container.Add($1);}
-	| IDENT ':' T_REAL {variables_container.Add($1);};
+	IDENT ':' T_INTEGER {/*variables_container.Add($1);*/}
+	| IDENT ':' T_REAL {/*variables_container.Add($1);*/};
 
 statement_sequence: 
-	statement_sequence statement ';' delimeter {}
+	statement_sequence statement ';' delimeter {$1->add($2);  $$ = $1;}
 	| {$$ = new ListOfStatements;};
 
 delimeter:

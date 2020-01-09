@@ -11,24 +11,24 @@
 
 class Statement {
  public:
-  virtual void run() = 0;
+  virtual void Run() = 0;
 };
 
 class ListOfStatements {
-  std::vector<Statement*> __list__;
+  std::vector<Statement*> list_;
  public:
   ListOfStatements() = default;
-  void add(Statement* state);
+  void Add(Statement* state);
   void run();
 
 };
 
 class PrintStatement : public Statement {
-  Expression* __expression__;
+  Expression* expression_;
  public:
   PrintStatement(Expression* expression) :
-      __expression__(expression) {}
-  void run() final;
+      expression_(expression) {}
+  void Run() final;
 };
 
 class IfStatement : public Statement {
@@ -43,16 +43,16 @@ class IfStatement : public Statement {
       __state1__(state1),
       __state2__(state2) {}
 
-  void run() final;
+  void Run() final;
 };
 
 class AssignStatement : public Statement {
-  std::string __name__;
-  Expression* __expression__;
+  std::string variable_name_;
+  Expression* expression_;
 
  public:
-  AssignStatement(std::string name, Expression* expression) :
-      __name__(std::move(name)),
-      __expression__(expression) {}
-  void run() final;
+  AssignStatement(std::string variable_name, Expression* expression) :
+      variable_name_(std::move(variable_name)),
+      expression_(expression) {}
+  void Run() final;
 };

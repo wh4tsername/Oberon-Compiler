@@ -40,11 +40,11 @@
 %token VAR
 %token T_BEGIN
 %token END
-%token T_INTEGER
-%token T_REAL
+%token T_INTEGER T_REAL T_BOOL T_STRING
 %token ASSIGNMENT_SYMBOL
 %token T_LE T_GE
 %token T_AND T_OR T_NOT
+%token T_TRUE T_FALSE
 
 %type <expression> expression
 %type <logical_expression> logic_expression
@@ -68,11 +68,13 @@ declaration_sequence:
 	| {};
 
 declaration:
-	IDENT ':' T_INTEGER {/*variables_container.Add($1);*/}
-	| IDENT ':' T_REAL {/*variables_container.Add($1);*/};
+	IDENT ':' T_INTEGER {variables_container.Add($1, "int");}
+	| IDENT ':' T_REAL {variables_container.Add($1, "double");};
+	| IDENT ':' T_BOOL {variables_container.Add($1, "bool");}
+        | IDENT ':' T_STRING {variables_container.Add($1, "string");};
 
 statement_sequence: 
-	statement_sequence statement ';' delimeter {$1->add($2);  $$ = $1;}
+	statement_sequence statement ';' delimeter {$1->Add($2);  $$ = $1;}
 	| {$$ = new ListOfStatements;};
 
 delimeter:
@@ -82,6 +84,8 @@ delimeter:
 statement: 
 	IDENT ASSIGNMENT_SYMBOL expression {$$ = new AssignStatement($1, $3);}
 	| PRINT expression {$$ = new PrintStatement($2);}
+	| IDENT ASSIGNMENT_SYMBOL logic_expression {$$ = new AssignStatement($1, $3);}
+        | PRINT logic_expression {$$ = new PrintStatement($2);}
 	| if_statement {}
 	| {};
 
@@ -97,20 +101,24 @@ elsif_statement:
 	| {};
 
 logic_expression: 
-	expression '<' expression {$$ = new LogicalExpression(0, $1, $3);}
-	| expression '>' expression {$$ = new LogicalExpression(2, $1, $3);}
-	| expression T_LE expression {$$ = new LogicalExpression(1, $1, $3);}
-	| expression T_GE expression {$$ = new LogicalExpression(3, $1, $3);}
-	| expression '=' expression {$$ = new LogicalExpression(4, $1, $3);}
-	| expression '#' expression {$$ = new LogicalExpression(5, $1, $3);}
-	| expression T_AND expression {$$ = new LogicalExpression(6, $1, $3);}
-	| expression T_OR expression {$$ = new LogicalExpression(7, $1, $3);}
-	| T_NOT expression %prec NOT {$$ = new LogicalExpression(8, $2, NULL);}
+	expression '<' expression {$$ = new LogicalExpression("<", $1, $3);}
+	| expression '>' expression {$$ = new LogicalExpression(">", $1, $3);}
+	| expression T_LE expression {$$ = new LogicalExpression("<=", $1, $3);}
+	| expression T_GE expression {$$ = new LogicalExpression(">=", $1, $3);}
+	| expression '=' expression {$$ = new LogicalExpression("=", $1, $3);}
+	| expression '#' expression {$$ = new LogicalExpression("#", $1, $3);}
+	| logic_expression T_AND logic_expression {$$ = new LogicalExpression("AND", $1, $3);}
+	| logic_expression T_OR logic_expression {$$ = new LogicalExpression("OR", $1, $3);}
+	| T_NOT logic_expression %prec NOT {$$ = new LogicalExpression("NOT", $2, NULL);}
+	| '(' logic_expression ')' {$$ = new LogicalExpression("()", $2, NULL);}
+	| T_TRUE {$$ = new LogicalExpression("TRUE", NULL, NULL); }
+        | T_FALSE {$$ = new LogicalExpression("FALSE", NULL, NULL);}
 	;
 
 expression:
 	IDENT {$$ = new VariableExpression($1);}
 	| NUMBER {$$ = new NumeralExpression($1);}
+	| REAL {$$ = new DoubleExpression($1);}
 	| '-' expression %prec UMINUS {$$ = new ArithmeticExpression(-5, $2, NULL);}
 	| expression '+' expression {$$ = new ArithmeticExpression(-1, $1, $3);}
 	| expression '-' expression {$$ = new ArithmeticExpression(-2, $1, $3);}

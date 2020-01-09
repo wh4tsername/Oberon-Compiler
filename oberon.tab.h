@@ -62,12 +62,16 @@ extern int yydebug;
     END = 272,
     T_INTEGER = 273,
     T_REAL = 274,
-    ASSIGNMENT_SYMBOL = 275,
-    T_LE = 276,
-    T_GE = 277,
-    T_AND = 278,
-    T_OR = 279,
-    T_NOT = 280
+    T_BOOL = 275,
+    T_STRING = 276,
+    ASSIGNMENT_SYMBOL = 277,
+    T_LE = 278,
+    T_GE = 279,
+    T_AND = 280,
+    T_OR = 281,
+    T_NOT = 282,
+    T_TRUE = 283,
+    T_FALSE = 284
   };
 #endif
 
@@ -88,7 +92,7 @@ union YYSTYPE
     
     char id_name[256];
 
-#line 92 "oberon.tab.h" /* yacc.c:1909  */
+#line 96 "oberon.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

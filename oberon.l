@@ -24,14 +24,18 @@ REAL (([1-9][0-9]*)|0)\.[0-9]*
 "ELSIF"     { return ELSIF; }
 "INTEGER"   { return T_INTEGER; }
 "REAL"      { return T_REAL; }
+"BOOL"      { return T_BOOL; }
+"STRING"    { return T_STRING; }
 "="         { return '='; }
 "<"         { return '<'; }
 ">"         { return '>'; }
-"<="        { return LE; }
-">="        { return GE; }
-"AND"       { return AND; }
-"OR"        { return OR; }
-"NOT"       { return NOT; }
+"<="        { return T_LE; }
+">="        { return T_GE; }
+"AND"       { return T_AND; }
+"OR"        { return T_OR; }
+"NOT"       { return T_NOT; }
+"TRUE"      { return T_TRUE; }
+"FALSE"     { return T_FALSE; }
 "+"         { return '+'; }
 "-"         { return '-'; }
 "/"         { return '/'; }
@@ -44,6 +48,7 @@ REAL (([1-9][0-9]*)|0)\.[0-9]*
 "."         { return '.'; }
 ":="        { return ASSIGNMENT_SYMBOL; }
 "\t"        { /* tab symbol - do nothing */ }
+"\n"        { /* end of line symbol - do nothing */}
 {IDENT}     { strcpy(yylval.id_name, yytext); return IDENT; }
 {NUMBER}    { yylval.int_value = atoi(yytext); return NUMBER; }
 {REAL}      { yylval.double_value = atof(yytext); return REAL; }

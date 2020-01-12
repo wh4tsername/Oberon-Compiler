@@ -1,6 +1,4 @@
 #include "statements.h"
-#include "errors.h"
-#include "variables.h"
 
 void ListOfStatements::Run() {
   for (auto&& element : list_) {

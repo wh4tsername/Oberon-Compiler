@@ -79,7 +79,7 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 11 "oberon.y" /* yacc.c:1909  */
+#line 13 "oberon.y" /* yacc.c:1909  */
 
     Expression* expression;
     LogicalExpression* logical_expression;

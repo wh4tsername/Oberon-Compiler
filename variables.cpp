@@ -1,5 +1,4 @@
 #include "variables.h"
-#include "errors.h"
 
 void VariablesContainer::Add(
     const std::string& variable_name, const std::string& type) {

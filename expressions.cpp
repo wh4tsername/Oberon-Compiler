@@ -1,5 +1,4 @@
 #include "expressions.h"
-#include "errors.h"
 #include "variables.h"
 
 double ArithmeticExpression::Count() {

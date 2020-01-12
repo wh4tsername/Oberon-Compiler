@@ -5,6 +5,8 @@
 #include <utility>
 #include <vector>
 
+#include "errors.h"
+
 class Expression {
  protected:
   int type_;

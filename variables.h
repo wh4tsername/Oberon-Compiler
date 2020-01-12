@@ -2,7 +2,9 @@
 
 #include <map>
 #include <string>
+
 #include "statements.h"
+#include "errors.h"
 
 class Statement;
 class ListOfStatements;

@@ -6,8 +6,10 @@
 #include <vector>
 #include <cstdlib>
 #include <iostream>
+
 #include "expressions.h"
 #include "variables.h"
+#include "errors.h"
 
 class Statement {
  public:

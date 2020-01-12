@@ -66,13 +66,15 @@
 
     #include <stdio.h>
     #include <stdlib.h>
+
     #include "declaration.h"
     #include "expressions.h"
     #include "variables.h"
+    #include "statements.h"
 
     #define YYERROR_VERBOSE 1
 
-#line 76 "oberon.tab.c" /* yacc.c:339  */
+#line 78 "oberon.tab.c" /* yacc.c:339  */
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -141,7 +143,7 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 11 "oberon.y" /* yacc.c:355  */
+#line 13 "oberon.y" /* yacc.c:355  */
 
     Expression* expression;
     LogicalExpression* logical_expression;
@@ -153,7 +155,7 @@ union YYSTYPE
     
     char id_name[256];
 
-#line 157 "oberon.tab.c" /* yacc.c:355  */
+#line 159 "oberon.tab.c" /* yacc.c:355  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -170,7 +172,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 174 "oberon.tab.c" /* yacc.c:358  */
+#line 176 "oberon.tab.c" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -470,11 +472,11 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    59,    59,    62,    63,    66,    69,    70,    73,    74,
-      75,    76,    79,    80,    83,    84,    87,    88,    89,    90,
-      91,    92,    95,    96,    97,    98,   101,   102,   103,   104,
-     105,   106,   107,   108,   109,   110,   111,   112,   116,   117,
-     118,   119,   120,   121,   122,   123,   124
+       0,    61,    61,    64,    65,    68,    71,    72,    75,    76,
+      77,    78,    81,    82,    85,    86,    89,    90,    91,    92,
+      93,    94,    97,    98,    99,   100,   103,   104,   105,   106,
+     107,   108,   109,   110,   111,   112,   113,   114,   118,   119,
+     120,   121,   122,   123,   124,   125,   126
 };
 #endif
 
@@ -1319,277 +1321,277 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 59 "oberon.y" /* yacc.c:1646  */
+#line 61 "oberon.y" /* yacc.c:1646  */
     {}
-#line 1325 "oberon.tab.c" /* yacc.c:1646  */
+#line 1327 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 3:
-#line 62 "oberon.y" /* yacc.c:1646  */
+#line 64 "oberon.y" /* yacc.c:1646  */
     {program = (yyvsp[0].list);}
-#line 1331 "oberon.tab.c" /* yacc.c:1646  */
+#line 1333 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 4:
-#line 63 "oberon.y" /* yacc.c:1646  */
+#line 65 "oberon.y" /* yacc.c:1646  */
     {}
-#line 1337 "oberon.tab.c" /* yacc.c:1646  */
+#line 1339 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 5:
-#line 66 "oberon.y" /* yacc.c:1646  */
+#line 68 "oberon.y" /* yacc.c:1646  */
     {}
-#line 1343 "oberon.tab.c" /* yacc.c:1646  */
+#line 1345 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 6:
-#line 69 "oberon.y" /* yacc.c:1646  */
+#line 71 "oberon.y" /* yacc.c:1646  */
     {}
-#line 1349 "oberon.tab.c" /* yacc.c:1646  */
+#line 1351 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 7:
-#line 70 "oberon.y" /* yacc.c:1646  */
+#line 72 "oberon.y" /* yacc.c:1646  */
     {}
-#line 1355 "oberon.tab.c" /* yacc.c:1646  */
+#line 1357 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 8:
-#line 73 "oberon.y" /* yacc.c:1646  */
+#line 75 "oberon.y" /* yacc.c:1646  */
     {variables_container.Add((yyvsp[-2].id_name), "int");}
-#line 1361 "oberon.tab.c" /* yacc.c:1646  */
+#line 1363 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 9:
-#line 74 "oberon.y" /* yacc.c:1646  */
+#line 76 "oberon.y" /* yacc.c:1646  */
     {variables_container.Add((yyvsp[-2].id_name), "double");}
-#line 1367 "oberon.tab.c" /* yacc.c:1646  */
+#line 1369 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 10:
-#line 75 "oberon.y" /* yacc.c:1646  */
+#line 77 "oberon.y" /* yacc.c:1646  */
     {variables_container.Add((yyvsp[-2].id_name), "bool");}
-#line 1373 "oberon.tab.c" /* yacc.c:1646  */
+#line 1375 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 11:
-#line 76 "oberon.y" /* yacc.c:1646  */
+#line 78 "oberon.y" /* yacc.c:1646  */
     {variables_container.Add((yyvsp[-2].id_name), "string");}
-#line 1379 "oberon.tab.c" /* yacc.c:1646  */
+#line 1381 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 12:
-#line 79 "oberon.y" /* yacc.c:1646  */
+#line 81 "oberon.y" /* yacc.c:1646  */
     {(yyvsp[-3].list)->Add((yyvsp[-2].statement));  (yyval.list) = (yyvsp[-3].list);}
-#line 1385 "oberon.tab.c" /* yacc.c:1646  */
+#line 1387 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 13:
-#line 80 "oberon.y" /* yacc.c:1646  */
+#line 82 "oberon.y" /* yacc.c:1646  */
     {(yyval.list) = new ListOfStatements;}
-#line 1391 "oberon.tab.c" /* yacc.c:1646  */
+#line 1393 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 14:
-#line 83 "oberon.y" /* yacc.c:1646  */
+#line 85 "oberon.y" /* yacc.c:1646  */
     {}
-#line 1397 "oberon.tab.c" /* yacc.c:1646  */
+#line 1399 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 15:
-#line 84 "oberon.y" /* yacc.c:1646  */
+#line 86 "oberon.y" /* yacc.c:1646  */
     {}
-#line 1403 "oberon.tab.c" /* yacc.c:1646  */
+#line 1405 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 16:
-#line 87 "oberon.y" /* yacc.c:1646  */
+#line 89 "oberon.y" /* yacc.c:1646  */
     {(yyval.statement) = new AssignStatement((yyvsp[-2].id_name), (yyvsp[0].expression));}
-#line 1409 "oberon.tab.c" /* yacc.c:1646  */
+#line 1411 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 17:
-#line 88 "oberon.y" /* yacc.c:1646  */
+#line 90 "oberon.y" /* yacc.c:1646  */
     {(yyval.statement) = new PrintStatement((yyvsp[0].expression));}
-#line 1415 "oberon.tab.c" /* yacc.c:1646  */
+#line 1417 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 18:
-#line 89 "oberon.y" /* yacc.c:1646  */
+#line 91 "oberon.y" /* yacc.c:1646  */
     {(yyval.statement) = new AssignStatement((yyvsp[-2].id_name), (yyvsp[0].logical_expression));}
-#line 1421 "oberon.tab.c" /* yacc.c:1646  */
+#line 1423 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 19:
-#line 90 "oberon.y" /* yacc.c:1646  */
+#line 92 "oberon.y" /* yacc.c:1646  */
     {(yyval.statement) = new PrintStatement((yyvsp[0].logical_expression));}
-#line 1427 "oberon.tab.c" /* yacc.c:1646  */
+#line 1429 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 20:
-#line 91 "oberon.y" /* yacc.c:1646  */
+#line 93 "oberon.y" /* yacc.c:1646  */
     {(yyval.statement) = (yyvsp[0].statement);}
-#line 1433 "oberon.tab.c" /* yacc.c:1646  */
+#line 1435 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 21:
-#line 92 "oberon.y" /* yacc.c:1646  */
+#line 94 "oberon.y" /* yacc.c:1646  */
     {}
-#line 1439 "oberon.tab.c" /* yacc.c:1646  */
+#line 1441 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 22:
-#line 95 "oberon.y" /* yacc.c:1646  */
+#line 97 "oberon.y" /* yacc.c:1646  */
     {(yyval.statement) = new IfStatement((yyvsp[-5].logical_expression), (yyvsp[-1].list), NULL);}
-#line 1445 "oberon.tab.c" /* yacc.c:1646  */
+#line 1447 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 23:
-#line 96 "oberon.y" /* yacc.c:1646  */
+#line 98 "oberon.y" /* yacc.c:1646  */
     {(yyval.statement) = new IfStatement((yyvsp[-8].logical_expression), (yyvsp[-4].list), (yyvsp[-1].list));}
-#line 1451 "oberon.tab.c" /* yacc.c:1646  */
+#line 1453 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 24:
-#line 97 "oberon.y" /* yacc.c:1646  */
+#line 99 "oberon.y" /* yacc.c:1646  */
     {(yyval.statement) = new IfStatement((yyvsp[-5].expression), (yyvsp[-1].list), NULL);}
-#line 1457 "oberon.tab.c" /* yacc.c:1646  */
+#line 1459 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 25:
-#line 98 "oberon.y" /* yacc.c:1646  */
+#line 100 "oberon.y" /* yacc.c:1646  */
     {(yyval.statement) = new IfStatement((yyvsp[-8].expression), (yyvsp[-4].list), (yyvsp[-1].list));}
-#line 1463 "oberon.tab.c" /* yacc.c:1646  */
+#line 1465 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 26:
-#line 101 "oberon.y" /* yacc.c:1646  */
+#line 103 "oberon.y" /* yacc.c:1646  */
     {(yyval.logical_expression) = new LogicalExpression("<", (yyvsp[-2].expression), (yyvsp[0].expression));}
-#line 1469 "oberon.tab.c" /* yacc.c:1646  */
+#line 1471 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 27:
-#line 102 "oberon.y" /* yacc.c:1646  */
+#line 104 "oberon.y" /* yacc.c:1646  */
     {(yyval.logical_expression) = new LogicalExpression(">", (yyvsp[-2].expression), (yyvsp[0].expression));}
-#line 1475 "oberon.tab.c" /* yacc.c:1646  */
+#line 1477 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 28:
-#line 103 "oberon.y" /* yacc.c:1646  */
+#line 105 "oberon.y" /* yacc.c:1646  */
     {(yyval.logical_expression) = new LogicalExpression("<=", (yyvsp[-2].expression), (yyvsp[0].expression));}
-#line 1481 "oberon.tab.c" /* yacc.c:1646  */
+#line 1483 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 29:
-#line 104 "oberon.y" /* yacc.c:1646  */
+#line 106 "oberon.y" /* yacc.c:1646  */
     {(yyval.logical_expression) = new LogicalExpression(">=", (yyvsp[-2].expression), (yyvsp[0].expression));}
-#line 1487 "oberon.tab.c" /* yacc.c:1646  */
+#line 1489 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 30:
-#line 105 "oberon.y" /* yacc.c:1646  */
+#line 107 "oberon.y" /* yacc.c:1646  */
     {(yyval.logical_expression) = new LogicalExpression("=", (yyvsp[-2].expression), (yyvsp[0].expression));}
-#line 1493 "oberon.tab.c" /* yacc.c:1646  */
+#line 1495 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 31:
-#line 106 "oberon.y" /* yacc.c:1646  */
+#line 108 "oberon.y" /* yacc.c:1646  */
     {(yyval.logical_expression) = new LogicalExpression("#", (yyvsp[-2].expression), (yyvsp[0].expression));}
-#line 1499 "oberon.tab.c" /* yacc.c:1646  */
+#line 1501 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 32:
-#line 107 "oberon.y" /* yacc.c:1646  */
+#line 109 "oberon.y" /* yacc.c:1646  */
     {(yyval.logical_expression) = new LogicalExpression("AND", (yyvsp[-2].logical_expression), (yyvsp[0].logical_expression));}
-#line 1505 "oberon.tab.c" /* yacc.c:1646  */
+#line 1507 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 33:
-#line 108 "oberon.y" /* yacc.c:1646  */
+#line 110 "oberon.y" /* yacc.c:1646  */
     {(yyval.logical_expression) = new LogicalExpression("OR", (yyvsp[-2].logical_expression), (yyvsp[0].logical_expression));}
-#line 1511 "oberon.tab.c" /* yacc.c:1646  */
+#line 1513 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 34:
-#line 109 "oberon.y" /* yacc.c:1646  */
+#line 111 "oberon.y" /* yacc.c:1646  */
     {(yyval.logical_expression) = new LogicalExpression("NOT", (yyvsp[0].logical_expression), NULL);}
-#line 1517 "oberon.tab.c" /* yacc.c:1646  */
+#line 1519 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 35:
-#line 110 "oberon.y" /* yacc.c:1646  */
+#line 112 "oberon.y" /* yacc.c:1646  */
     {(yyval.logical_expression) = (yyvsp[-1].logical_expression);}
-#line 1523 "oberon.tab.c" /* yacc.c:1646  */
+#line 1525 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 36:
-#line 111 "oberon.y" /* yacc.c:1646  */
+#line 113 "oberon.y" /* yacc.c:1646  */
     {(yyval.logical_expression) = new LogicalExpression("TRUE", NULL, NULL); }
-#line 1529 "oberon.tab.c" /* yacc.c:1646  */
+#line 1531 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 37:
-#line 112 "oberon.y" /* yacc.c:1646  */
+#line 114 "oberon.y" /* yacc.c:1646  */
     {(yyval.logical_expression) = new LogicalExpression("FALSE", NULL, NULL);}
-#line 1535 "oberon.tab.c" /* yacc.c:1646  */
+#line 1537 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 38:
-#line 116 "oberon.y" /* yacc.c:1646  */
+#line 118 "oberon.y" /* yacc.c:1646  */
     {(yyval.expression) = new VariableExpression((yyvsp[0].id_name));}
-#line 1541 "oberon.tab.c" /* yacc.c:1646  */
+#line 1543 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 39:
-#line 117 "oberon.y" /* yacc.c:1646  */
+#line 119 "oberon.y" /* yacc.c:1646  */
     {(yyval.expression) = new NumeralExpression((yyvsp[0].int_value));}
-#line 1547 "oberon.tab.c" /* yacc.c:1646  */
+#line 1549 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 40:
-#line 118 "oberon.y" /* yacc.c:1646  */
+#line 120 "oberon.y" /* yacc.c:1646  */
     {(yyval.expression) = new DoubleExpression((yyvsp[0].double_value));}
-#line 1553 "oberon.tab.c" /* yacc.c:1646  */
+#line 1555 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 41:
-#line 119 "oberon.y" /* yacc.c:1646  */
+#line 121 "oberon.y" /* yacc.c:1646  */
     {(yyval.expression) = new ArithmeticExpression("@", (yyvsp[0].expression), NULL);}
-#line 1559 "oberon.tab.c" /* yacc.c:1646  */
+#line 1561 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 42:
-#line 120 "oberon.y" /* yacc.c:1646  */
+#line 122 "oberon.y" /* yacc.c:1646  */
     {(yyval.expression) = new ArithmeticExpression("+", (yyvsp[-2].expression), (yyvsp[0].expression));}
-#line 1565 "oberon.tab.c" /* yacc.c:1646  */
+#line 1567 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 43:
-#line 121 "oberon.y" /* yacc.c:1646  */
+#line 123 "oberon.y" /* yacc.c:1646  */
     {(yyval.expression) = new ArithmeticExpression("-", (yyvsp[-2].expression), (yyvsp[0].expression));}
-#line 1571 "oberon.tab.c" /* yacc.c:1646  */
+#line 1573 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 44:
-#line 122 "oberon.y" /* yacc.c:1646  */
+#line 124 "oberon.y" /* yacc.c:1646  */
     {(yyval.expression) = new ArithmeticExpression("*", (yyvsp[-2].expression), (yyvsp[0].expression));}
-#line 1577 "oberon.tab.c" /* yacc.c:1646  */
+#line 1579 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 45:
-#line 123 "oberon.y" /* yacc.c:1646  */
+#line 125 "oberon.y" /* yacc.c:1646  */
     {(yyval.expression) = new ArithmeticExpression("/", (yyvsp[-2].expression), (yyvsp[0].expression));}
-#line 1583 "oberon.tab.c" /* yacc.c:1646  */
+#line 1585 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
   case 46:
-#line 124 "oberon.y" /* yacc.c:1646  */
+#line 126 "oberon.y" /* yacc.c:1646  */
     {(yyval.expression) = (yyvsp[-1].expression);}
-#line 1589 "oberon.tab.c" /* yacc.c:1646  */
+#line 1591 "oberon.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1593 "oberon.tab.c" /* yacc.c:1646  */
+#line 1595 "oberon.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1817,5 +1819,5 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 126 "oberon.y" /* yacc.c:1906  */
+#line 128 "oberon.y" /* yacc.c:1906  */
 

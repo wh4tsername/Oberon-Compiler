@@ -1,9 +1,11 @@
 %{
     #include <stdio.h>
     #include <stdlib.h>
+
     #include "declaration.h"
     #include "expressions.h"
     #include "variables.h"
+    #include "statements.h"
 
     #define YYERROR_VERBOSE 1
 %}

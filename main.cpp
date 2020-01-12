@@ -1,5 +1,5 @@
 #include <iostream>
-#include "expressions.h"
+
 #include "errors.h"
 #include "statements.h"
 
@@ -12,6 +12,7 @@ ListOfStatements* program;
 
 void yyerror(const std::string& string) {
   std::cerr << "Parser error: " << string << std::endl;
+  exit(COMPILE_ERROR);
 }
 
 int main(int argc, char** argv) {

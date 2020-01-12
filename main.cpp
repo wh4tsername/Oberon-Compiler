@@ -8,7 +8,6 @@ extern int yylineno;
 extern void yyparse();
 extern FILE* yyin;
 
-extern VariablesContainer variables_container;
 ListOfStatements* program;
 
 void yyerror(const std::string& string) {
@@ -29,7 +28,7 @@ int main(int argc, char** argv) {
 
   yyin = handle;
   yyparse();
-  program->run();
+  program->Run();
 
   return 0;
 }

@@ -21,7 +21,6 @@ REAL (([1-9][0-9]*)|0)\.[0-9]*
 "IF"        { return IF; }
 "THEN"      { return THEN; }
 "ELSE"      { return ELSE; }
-"ELSIF"     { return ELSIF; }
 "INTEGER"   { return T_INTEGER; }
 "REAL"      { return T_REAL; }
 "BOOL"      { return T_BOOL; }

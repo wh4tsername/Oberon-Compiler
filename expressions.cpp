@@ -9,23 +9,28 @@ double ArithmeticExpression::Count() {
   if (rhs_) {
     rhs_value = rhs_->Count();
   }
-  switch (operation_) {
-    case ArithmeticOperation::ADD:
-      return lhs_value + rhs_value;
-    case ArithmeticOperation::SUBSTRACT:
-      return lhs_value - rhs_value;
-    case ArithmeticOperation::MULTIPLY:
-      return lhs_value * rhs_value;
-    case ArithmeticOperation::DIVIDE:
-      if (rhs_value == 0) {
-        std::cerr << "Runtime error: division by zero" << std::endl;
-        exit(RUNTIME_ERROR);
-      }
-      return lhs_value / rhs_value;
-    case ArithmeticOperation::UMINUS_:
-      return -lhs_value;
+
+  if (operation_ == "+") {
+    return lhs_value + rhs_value;
   }
-  return 0;
+  if (operation_ == "-") {
+    return lhs_value - rhs_value;
+  }
+  if (operation_ == "*") {
+    return lhs_value * rhs_value;
+  }
+  if (operation_ == "/") {
+    if (rhs_value == 0) {
+      std::cerr << "Runtime error: division by zero" << std::endl;
+      exit(RUNTIME_ERROR);
+    }
+    return lhs_value / rhs_value;
+  }
+  if (operation_ == "@") {
+    return -lhs_value;
+  }
+
+  exit(RUNTIME_ERROR);
 }
 
 VariableExpression::VariableExpression(const char* variable_name)
@@ -39,7 +44,7 @@ VariableExpression::VariableExpression(const char* variable_name)
   } else if (variables_container.ExistsString(variable_name_)) {
     type_ = Type::T_STRING;
   } else {
-    std::cerr << variable_name_ << " isn't declared in this scope\n";
+    std::cerr << variable_name_ << " isn't declared in this scope" << std::endl;
     exit(NOT_DECLARED_VARIABLE);
   }
 }
@@ -52,7 +57,7 @@ double VariableExpression::Count() {
   } else if (variables_container.ExistsBool(variable_name_)) {
     return variables_container.GetBool(variable_name_);
   } else {
-    std::cerr << variable_name_  << " isn't declared in this scope\n";
+    std::cerr << variable_name_  << " isn't declared in this scope" << std::endl;
     exit(NOT_DECLARED_VARIABLE);
   }
 }
@@ -61,7 +66,7 @@ std::string VariableExpression::CountString() {
   if (variables_container.ExistsString(variable_name_)) {
     return variables_container.GetString(variable_name_);
   } else {
-    std::cerr << variable_name_  << " isn't declared in this scope\n";
+    std::cerr << variable_name_  << " isn't declared in this scope" << std::endl;
     exit(NOT_DECLARED_VARIABLE);
   }
 }
@@ -74,8 +79,8 @@ double LogicalExpression::Count() {
     return 0;
   }
 
-  if (operation_ == "()") {
-    return lhs_->Count();
+  if (operation_ == "EXPR") {
+    return static_cast<bool>(lhs_->Count());
   }
 
   if (operation_ == "AND") {
@@ -106,4 +111,6 @@ double LogicalExpression::Count() {
   } else if (operation_ == "<=") {
     return lhs_value <= rhs_value;
   }
+
+  exit(RUNTIME_ERROR);
 }

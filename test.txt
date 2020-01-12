@@ -1,9 +1,11 @@
 MODULE a;
 IMPORT;
-VAR co: int;
-    b: REAL;
+VAR c: BOOL;
+    b: BOOL;
+    d: BOOL;
+    e1: BOOL;
 BEGIN
-co := 3.207;
-b := 10.103;
-PRINT co + b;
+e1 := -4 / 3;
+PRINT e1;
+
 END a.

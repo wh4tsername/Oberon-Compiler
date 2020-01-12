@@ -21,8 +21,10 @@
 }
 
 %left '+' '-'
-
 %left '*' '/'
+%left T_LE T_GE
+%left T_OR
+%left T_AND
 
 %nonassoc UMINUS
 %nonassoc NOT
@@ -34,7 +36,6 @@
 %token IF
 %token THEN
 %token ELSE
-%token ELSIF
 %token MODULE
 %token IMPORT
 %token VAR
@@ -50,6 +51,7 @@
 %type <logical_expression> logic_expression
 %type <list> statement_sequence
 %type <statement> statement
+%type <statement> if_statement
 
 %%
 
@@ -86,19 +88,14 @@ statement:
 	| PRINT expression {$$ = new PrintStatement($2);}
 	| IDENT ASSIGNMENT_SYMBOL logic_expression {$$ = new AssignStatement($1, $3);}
         | PRINT logic_expression {$$ = new PrintStatement($2);}
-	| if_statement {}
+	| if_statement {$$ = $1;}
 	| {};
 
-if_statement: 
-	IF logic_expression THEN delimeter statement_sequence 
-	elsif_statement
-	ELSE delimeter statement_sequence END {}
-	| IF logic_expression THEN delimeter statement_sequence
-	elsif_statement END {};
-
-elsif_statement:
-	ELSIF logic_expression THEN delimeter statement_sequence {}
-	| {};
+if_statement:
+	IF '(' logic_expression ')' THEN delimeter statement_sequence END {$$ = new IfStatement($3, $7, NULL);}
+	| IF '(' logic_expression ')' THEN delimeter statement_sequence ELSE delimeter statement_sequence END {$$ = new IfStatement($3, $7, $10);};
+	| IF '(' expression ')' THEN delimeter statement_sequence END {$$ = new IfStatement($3, $7, NULL);}
+        | IF '(' expression ')' THEN delimeter statement_sequence ELSE delimeter statement_sequence END {$$ = new IfStatement($3, $7, $10);};
 
 logic_expression: 
 	expression '<' expression {$$ = new LogicalExpression("<", $1, $3);}
@@ -110,7 +107,7 @@ logic_expression:
 	| logic_expression T_AND logic_expression {$$ = new LogicalExpression("AND", $1, $3);}
 	| logic_expression T_OR logic_expression {$$ = new LogicalExpression("OR", $1, $3);}
 	| T_NOT logic_expression %prec NOT {$$ = new LogicalExpression("NOT", $2, NULL);}
-	| '(' logic_expression ')' {$$ = new LogicalExpression("()", $2, NULL);}
+	| '(' logic_expression ')' {$$ = $2;}
 	| T_TRUE {$$ = new LogicalExpression("TRUE", NULL, NULL); }
         | T_FALSE {$$ = new LogicalExpression("FALSE", NULL, NULL);}
 	;
@@ -119,11 +116,11 @@ expression:
 	IDENT {$$ = new VariableExpression($1);}
 	| NUMBER {$$ = new NumeralExpression($1);}
 	| REAL {$$ = new DoubleExpression($1);}
-	| '-' expression %prec UMINUS {$$ = new ArithmeticExpression(-5, $2, NULL);}
-	| expression '+' expression {$$ = new ArithmeticExpression(-1, $1, $3);}
-	| expression '-' expression {$$ = new ArithmeticExpression(-2, $1, $3);}
-	| expression '*' expression {$$ = new ArithmeticExpression(-3, $1, $3);}
-	| expression '/' expression {$$ = new ArithmeticExpression(-4, $1, $3);}
+	| '-' expression %prec UMINUS {$$ = new ArithmeticExpression("@", $2, NULL);}
+	| expression '+' expression {$$ = new ArithmeticExpression("+", $1, $3);}
+	| expression '-' expression {$$ = new ArithmeticExpression("-", $1, $3);}
+	| expression '*' expression {$$ = new ArithmeticExpression("*", $1, $3);}
+	| expression '/' expression {$$ = new ArithmeticExpression("/", $1, $3);}
 	| '(' expression ')' {$$ = $2;}
 	;
 %%

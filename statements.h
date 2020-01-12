@@ -15,35 +15,40 @@ class Statement {
 };
 
 class ListOfStatements {
-  std::vector<Statement*> list_;
  public:
   ListOfStatements() = default;
   void Add(Statement* state);
-  void run();
+  void Run();
 
+ private:
+  std::vector<Statement*> list_;
 };
 
 class PrintStatement : public Statement {
-  Expression* expression_;
  public:
-  PrintStatement(Expression* expression) :
+  explicit PrintStatement(Expression* expression) :
       expression_(expression) {}
   void Run() final;
+
+ private:
+  Expression* expression_;
 };
 
 class IfStatement : public Statement {
-  LogicalExpression* __expression__;
-  ListOfStatements *__state1__;
-  ListOfStatements *__state2__;
  public:
-  IfStatement(LogicalExpression* expression,
-              ListOfStatements* state1,
-              ListOfStatements* state2) :
-      __expression__(expression),
-      __state1__(state1),
-      __state2__(state2) {}
+  IfStatement(Expression* expression,
+              ListOfStatements* first_statement,
+              ListOfStatements* second_statement) :
+      expression_(expression),
+      first_statement_(first_statement),
+      second_statement_(second_statement) {}
 
   void Run() final;
+
+ private:
+  Expression* expression_;
+  ListOfStatements *first_statement_;
+  ListOfStatements *second_statement_;
 };
 
 class AssignStatement : public Statement {

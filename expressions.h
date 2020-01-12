@@ -5,17 +5,9 @@
 #include <utility>
 #include <vector>
 
-enum ArithmeticOperation {
-  ADD = -1,
-  SUBSTRACT = -2,
-  MULTIPLY = -3,
-  DIVIDE = -4,
-  UMINUS_ = -5
-};
-
 class Expression {
  protected:
-  int type_ = -1;
+  int type_;
 
  public:
   virtual double Count() = 0;
@@ -37,29 +29,16 @@ class Expression {
 
 class ArithmeticExpression : public Expression {
  public:
-  ArithmeticExpression(int operation, Expression* lhs,
+  ArithmeticExpression(std::string  operation, Expression* lhs,
                        Expression* rhs)
-      : operation_(operation), lhs_(lhs), rhs_(rhs) {}
+      : operation_(std::move(operation)), lhs_(lhs), rhs_(rhs) {}
 
   double Count() final;
 
  private:
-  int operation_;
+  std::string operation_;
   Expression* lhs_;
   Expression* rhs_;
-};
-
-class VariableExpression : public Expression {
- public:
-  explicit VariableExpression(const char* variable_name);
-
-  ~VariableExpression();
-
-  double Count() final;
-  std::string CountString() final;
-
- private:
-  std::string variable_name_;
 };
 
 class NumeralExpression : public Expression {
@@ -86,6 +65,17 @@ class DoubleExpression : public Expression {
   double value_;
 };
 
+class VariableExpression : public Expression {
+ public:
+  explicit VariableExpression(const char* variable_name);
+
+  double Count() final;
+  std::string CountString() final;
+
+ private:
+  std::string variable_name_;
+};
+
 class LogicalExpression : public Expression {
  public:
   LogicalExpression(std::string operation, Expression* lhs,
@@ -100,5 +90,4 @@ class LogicalExpression : public Expression {
   std::string operation_;
   Expression* lhs_;
   Expression* rhs_;
-  int type_;
 };

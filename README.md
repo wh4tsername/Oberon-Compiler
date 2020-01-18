@@ -1,4 +1,11 @@
 # Oberon-Compiler
+## compiler launch
+to compile filename.txt
+    1) change directory to project directory  
+    2) type in console:  
+    $ make
+    $ ./oberon filename.txt
+
 ## test launch    
     1) change directory to project directory  
     2) type in console:  

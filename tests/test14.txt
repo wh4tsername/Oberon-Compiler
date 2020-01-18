@@ -1,0 +1,13 @@
+false
+*****
+MODULE a;
+IMPORT;
+VAR b: INTEGER;
+    c: INTEGER;
+    d: INTEGER;
+BEGIN
+b := 3;
+c := 2;
+d := 10;
+PRINT (b < c) OR (d >= 11);
+END a.

@@ -109,6 +109,13 @@ logic_expression:
 	| logic_expression T_AND logic_expression {$$ = new LogicalExpression("AND", $1, $3);}
 	| logic_expression T_OR logic_expression {$$ = new LogicalExpression("OR", $1, $3);}
 	| T_NOT logic_expression %prec NOT {$$ = new LogicalExpression("NOT", $2, NULL);}
+	| expression T_AND logic_expression {$$ = new LogicalExpression("AND", $1, $3);}
+        | expression T_OR logic_expression {$$ = new LogicalExpression("OR", $1, $3);}
+        | T_NOT expression %prec NOT {$$ = new LogicalExpression("NOT", $2, NULL);}
+        | logic_expression T_AND expression {$$ = new LogicalExpression("AND", $1, $3);}
+        | logic_expression T_OR expression {$$ = new LogicalExpression("OR", $1, $3);}
+        | expression T_AND expression {$$ = new LogicalExpression("AND", $1, $3);}
+        | expression T_OR expression {$$ = new LogicalExpression("OR", $1, $3);}
 	| '(' logic_expression ')' {$$ = $2;}
 	| T_TRUE {$$ = new LogicalExpression("TRUE", NULL, NULL); }
         | T_FALSE {$$ = new LogicalExpression("FALSE", NULL, NULL);}

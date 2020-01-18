@@ -83,15 +83,15 @@ double LogicalExpression::Count() {
   }
 
   if (operation_ == "AND") {
-    assert(lhs_->GetType() == Type::T_BOOL && rhs_->GetType() == Type::T_BOOL);
+    assert(lhs_->GetType() != Type::T_STRING && rhs_->GetType() != Type::T_STRING);
     return static_cast<bool>(lhs_->Count()) && static_cast<bool>(rhs_->Count());
   }
   if (operation_ == "OR") {
-    assert(lhs_->GetType() == Type::T_BOOL && rhs_->GetType() == Type::T_BOOL);
+    assert(lhs_->GetType() != Type::T_STRING && rhs_->GetType() != Type::T_STRING);
     return static_cast<bool>(lhs_->Count()) || static_cast<bool>(rhs_->Count());
   }
   if (operation_ == "NOT") {
-    assert(lhs_->GetType() == Type::T_BOOL);
+    assert(lhs_->GetType() != Type::T_STRING);
     return !static_cast<bool>(lhs_->Count());
   }
 

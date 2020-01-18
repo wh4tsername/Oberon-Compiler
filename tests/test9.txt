@@ -1,0 +1,13 @@
+1565
+*****
+MODULE a;
+IMPORT;
+VAR b: INTEGER;
+    c: INTEGER;
+    d: INTEGER;
+BEGIN
+b := 1337;
+c := 228;
+d := c + b;
+PRINT d;
+END a.

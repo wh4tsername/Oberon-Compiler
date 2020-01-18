@@ -1,0 +1,8 @@
+false
+*****
+MODULE a;
+IMPORT;
+VAR b: INTEGER;
+BEGIN
+PRINT FALSE;
+END a.

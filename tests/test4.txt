@@ -1,0 +1,14 @@
+0
+*****
+MODULE a;
+IMPORT;
+VAR c: BOOL;
+    b: BOOL;
+    d: BOOL;
+    e1: INTEGER;
+BEGIN
+
+e1 := 1 / 3;
+PRINT e1;
+
+END a.

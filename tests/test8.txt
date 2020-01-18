@@ -1,0 +1,11 @@
+13.103
+*****
+MODULE a;
+IMPORT;
+VAR co: INTEGER;
+    b: REAL;
+BEGIN
+co := 3.207;
+b := 10.103;
+PRINT co + b;
+END a.

@@ -1,0 +1,13 @@
+-3
+*****
+MODULE a;
+IMPORT;
+VAR b: INTEGER;
+    c: INTEGER;
+    d: INTEGER;
+BEGIN
+b := 3;
+c := 2;
+d := 10;
+PRINT (-5) * (-c * b) / (-d);
+END a.

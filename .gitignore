@@ -14,3 +14,11 @@ cmake_install.cmake
 Makefile.txt
 
 Oberon_Compiler.cbp
+
+oberon
+
+oberon.dot
+
+oberon.output
+
+outfile.ps

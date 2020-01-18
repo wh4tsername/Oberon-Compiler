@@ -4,53 +4,62 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <cstdlib>
+#include <iostream>
+
 #include "expressions.h"
 #include "variables.h"
+#include "errors.h"
 
 class Statement {
  public:
-  virtual void run() = 0;
+  virtual void Run() = 0;
 };
 
 class ListOfStatements {
-  std::vector<Statement*> __list__;
  public:
   ListOfStatements() = default;
-  void add(Statement* state);
-  void run();
+  void Add(Statement* state);
+  void Run();
 
+ private:
+  std::vector<Statement*> list_;
 };
 
 class PrintStatement : public Statement {
-  Expression* __expression__;
  public:
-  PrintStatement(Expression* expression):
-      __expression__(expression) {}
-  void run() final;
+  explicit PrintStatement(Expression* expression) :
+      expression_(expression) {}
+  void Run() final;
+
+ private:
+  Expression* expression_;
 };
 
 class IfStatement : public Statement {
-  LogicalExpression* __expression__;
-  ListOfStatements *__state1__;
-  ListOfStatements *__state2__;
  public:
-  IfStatement(LogicalExpression* expression,
-              ListOfStatements* state1,
-              ListOfStatements* state2) :
-      __expression__(expression),
-      __state1__(state1),
-      __state2__(state2) {}
+  IfStatement(Expression* expression,
+              ListOfStatements* first_statement,
+              ListOfStatements* second_statement) :
+      expression_(expression),
+      first_statement_(first_statement),
+      second_statement_(second_statement) {}
 
-  void run() final;
+  void Run() final;
+
+ private:
+  Expression* expression_;
+  ListOfStatements *first_statement_;
+  ListOfStatements *second_statement_;
 };
 
 class AssignStatement : public Statement {
-  std::string __name__;
-  Expression* __expression__;
+  std::string variable_name_;
+  Expression* expression_;
 
  public:
-  AssignStatement(std::string name, Expression* expression) :
-      __name__(std::move(name)),
-      __expression__(expression) {}
-  void run() final;
+  AssignStatement(std::string variable_name, Expression* expression) :
+      variable_name_(std::move(variable_name)),
+      expression_(expression) {}
+  void Run() final;
 };

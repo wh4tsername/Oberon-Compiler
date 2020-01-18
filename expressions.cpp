@@ -1,6 +1,4 @@
 #include "expressions.h"
-#include <iostream>
-#include "errors.h"
 #include "variables.h"
 
 double ArithmeticExpression::Count() {
@@ -10,57 +8,108 @@ double ArithmeticExpression::Count() {
   if (rhs_) {
     rhs_value = rhs_->Count();
   }
-  switch (operation_) {
-    case ArithmeticOperation::ADD:
-      return lhs_value + rhs_value;
-    case ArithmeticOperation::SUBSTRACT:
-      return lhs_value - rhs_value;
-    case ArithmeticOperation::MULTIPLY:
-      return lhs_value * rhs_value;
-    case ArithmeticOperation::DIVIDE:
-      if (rhs_value == 0) {
-        std::cerr << "Runtime error: division by zero" << std::endl;
-        exit(RUNTIME_ERROR);
-      }
-    case ArithmeticOperation::UMINUS_:
-      return -lhs_value;
+
+  if (operation_ == "+") {
+    return lhs_value + rhs_value;
   }
-  return 0;
+  if (operation_ == "-") {
+    return lhs_value - rhs_value;
+  }
+  if (operation_ == "*") {
+    return lhs_value * rhs_value;
+  }
+  if (operation_ == "/") {
+    if (rhs_value == 0) {
+      std::cerr << "Runtime error: division by zero" << std::endl;
+      exit(RUNTIME_ERROR);
+    }
+    return lhs_value / rhs_value;
+  }
+  if (operation_ == "@") {
+    return -lhs_value;
+  }
+
+  exit(RUNTIME_ERROR);
+}
+
+VariableExpression::VariableExpression(const char* variable_name)
+    : variable_name_(variable_name) {
+  if (variables_container.ExistsInt(variable_name_)) {
+    type_ = Type::T_INT;
+  } else if (variables_container.ExistsDouble(variable_name_)){
+    type_ = Type::T_REAL;
+  } else if (variables_container.ExistsBool(variable_name_)) {
+    type_ = Type::T_BOOL;
+  } else if (variables_container.ExistsString(variable_name_)) {
+    type_ = Type::T_STRING;
+  } else {
+    std::cerr << variable_name_ << " isn't declared in this scope" << std::endl;
+    exit(NOT_DECLARED_VARIABLE);
+  }
 }
 
 double VariableExpression::Count() {
-  if (variables_container.Exists(variable_name_)) {
-    return variables_container.Get(variable_name_);
+  if (variables_container.ExistsInt(variable_name_)) {
+    return variables_container.GetInt(variable_name_);
+  } else if (variables_container.ExistsDouble(variable_name_)){
+    return variables_container.GetDouble(variable_name_);
+  } else if (variables_container.ExistsBool(variable_name_)) {
+    return variables_container.GetBool(variable_name_);
+  } else {
+    std::cerr << variable_name_  << " isn't declared in this scope" << std::endl;
+    exit(NOT_DECLARED_VARIABLE);
   }
-  std::cerr << variable_name_ << " isn't declared in this scope" << std::endl;
-  exit(NOT_DECLARED_VARIABLE);
+}
+
+std::string VariableExpression::CountString() {
+  if (variables_container.ExistsString(variable_name_)) {
+    return variables_container.GetString(variable_name_);
+  } else {
+    std::cerr << variable_name_  << " isn't declared in this scope" << std::endl;
+    exit(NOT_DECLARED_VARIABLE);
+  }
 }
 
 double LogicalExpression::Count() {
-  bool lhs_value = false;
-  bool rhs_value = false;
-  lhs_value = static_cast<bool>(lhs_->Count());
-  if (rhs_) {
-    rhs_value = static_cast<bool>(rhs_->Count());
+  if (operation_ == "TRUE") {
+    return 1;
   }
-  switch (operation_) {
-    case LogicalOperation::EQ:
-      return lhs_value == rhs_value;
-    case LogicalOperation::NE:
-      return lhs_value != rhs_value;
-    case LogicalOperation::LT:
-      return lhs_value < rhs_value;
-    case LogicalOperation::LE:
-      return lhs_value <= rhs_value;
-    case LogicalOperation::GT:
-      return lhs_value > rhs_value;
-    case LogicalOperation::GE:
-      return lhs_value >= rhs_value;
-    case LogicalOperation::AND:
-      return lhs_value && rhs_value;
-    case LogicalOperation::OR:
-      return lhs_value || rhs_value;
-    case LogicalOperation::NOT_:
-      return !lhs_value;
+  if (operation_ == "FALSE") {
+    return 0;
   }
+
+  if (operation_ == "EXPR") {
+    return static_cast<bool>(lhs_->Count());
+  }
+
+  if (operation_ == "AND") {
+    assert(lhs_->GetType() != Type::T_STRING && rhs_->GetType() != Type::T_STRING);
+    return static_cast<bool>(lhs_->Count()) && static_cast<bool>(rhs_->Count());
+  }
+  if (operation_ == "OR") {
+    assert(lhs_->GetType() != Type::T_STRING && rhs_->GetType() != Type::T_STRING);
+    return static_cast<bool>(lhs_->Count()) || static_cast<bool>(rhs_->Count());
+  }
+  if (operation_ == "NOT") {
+    assert(lhs_->GetType() != Type::T_STRING);
+    return !static_cast<bool>(lhs_->Count());
+  }
+
+  double lhs_value = lhs_->Count();
+  double rhs_value = rhs_->Count();
+  if (operation_ == "=") {
+    return lhs_value == rhs_value;
+  } else if (operation_ == "<") {
+    return lhs_value < rhs_value;
+  } else if (operation_ == ">") {
+    return lhs_value > rhs_value;
+  } else if (operation_ == "#") {
+    return lhs_value != rhs_value;
+  } else if (operation_ == ">=") {
+    return lhs_value >= rhs_value;
+  } else if (operation_ == "<=") {
+    return lhs_value <= rhs_value;
+  }
+
+  exit(RUNTIME_ERROR);
 }

@@ -45,21 +45,32 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    UMINUS = 258,
-    NOT = 259,
-    NUMBER = 260,
-    REAL = 261,
-    IDENT = 262,
-    PRINT = 263,
-    IF = 264,
-    THEN = 265,
-    ELSE = 266,
-    ELSIF = 267,
-    MODULE = 268,
-    IMPORT = 269,
-    VAR = 270,
-    T_BEGIN = 271,
-    END = 272
+    T_LE = 258,
+    T_GE = 259,
+    T_OR = 260,
+    T_AND = 261,
+    UMINUS = 262,
+    NOT = 263,
+    NUMBER = 264,
+    REAL = 265,
+    IDENT = 266,
+    PRINT = 267,
+    IF = 268,
+    THEN = 269,
+    ELSE = 270,
+    MODULE = 271,
+    IMPORT = 272,
+    VAR = 273,
+    T_BEGIN = 274,
+    END = 275,
+    T_INTEGER = 276,
+    T_REAL = 277,
+    T_BOOL = 278,
+    T_STRING = 279,
+    ASSIGNMENT_SYMBOL = 280,
+    T_NOT = 281,
+    T_TRUE = 282,
+    T_FALSE = 283
   };
 #endif
 
@@ -68,7 +79,7 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 9 "oberon.y" /* yacc.c:1909  */
+#line 13 "oberon.y" /* yacc.c:1909  */
 
     Expression* expression;
     LogicalExpression* logical_expression;
@@ -80,7 +91,7 @@ union YYSTYPE
     
     char id_name[256];
 
-#line 84 "oberon.tab.h" /* yacc.c:1909  */
+#line 95 "oberon.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

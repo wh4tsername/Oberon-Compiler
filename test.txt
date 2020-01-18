@@ -1,5 +1,0 @@
-MODULE a;
-IMPORT ;
-VAR    b: INTEGER;
-BEGIN
-END a.

@@ -6,9 +6,7 @@ void ListOfStatements::Run() {
   }
 }
 
-void ListOfStatements::Add(Statement* state) {
-  list_.emplace_back(state);
-}
+void ListOfStatements::Add(Statement* state) { list_.emplace_back(state); }
 
 void PrintStatement::Run() {
   if (!expression_) {
@@ -41,7 +39,8 @@ void AssignStatement::Run() {
     if (expression_->GetType() == Expression::Type::T_STRING) {
       std::string result = expression_->CountString();
       if (!variables_container.ExistsString(variable_name_)) {
-        std::cerr << variable_name_ << " isn't declared in this scope or has incompatible type\n";
+        std::cerr << variable_name_
+                  << " isn't declared in this scope or has incompatible type\n";
         exit(NOT_DECLARED_VARIABLE);
       }
       variables_container.ChangeString(variable_name_, result);
@@ -56,7 +55,8 @@ void AssignStatement::Run() {
     } else if (variables_container.ExistsBool(variable_name_)) {
       variables_container.ChangeBool(variable_name_, static_cast<bool>(value));
     } else {
-      std::cerr << variable_name_ << " isn't declared in this scope or has incompatible type\n";
+      std::cerr << variable_name_
+                << " isn't declared in this scope or has incompatible type\n";
       exit(NOT_DECLARED_VARIABLE);
     }
   } else {

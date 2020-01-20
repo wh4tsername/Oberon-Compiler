@@ -36,7 +36,7 @@ VariableExpression::VariableExpression(const char* variable_name)
     : variable_name_(variable_name) {
   if (variables_container.ExistsInt(variable_name_)) {
     type_ = Type::T_INT;
-  } else if (variables_container.ExistsDouble(variable_name_)){
+  } else if (variables_container.ExistsDouble(variable_name_)) {
     type_ = Type::T_REAL;
   } else if (variables_container.ExistsBool(variable_name_)) {
     type_ = Type::T_BOOL;
@@ -51,12 +51,12 @@ VariableExpression::VariableExpression(const char* variable_name)
 double VariableExpression::Count() {
   if (variables_container.ExistsInt(variable_name_)) {
     return variables_container.GetInt(variable_name_);
-  } else if (variables_container.ExistsDouble(variable_name_)){
+  } else if (variables_container.ExistsDouble(variable_name_)) {
     return variables_container.GetDouble(variable_name_);
   } else if (variables_container.ExistsBool(variable_name_)) {
     return variables_container.GetBool(variable_name_);
   } else {
-    std::cerr << variable_name_  << " isn't declared in this scope" << std::endl;
+    std::cerr << variable_name_ << " isn't declared in this scope" << std::endl;
     exit(NOT_DECLARED_VARIABLE);
   }
 }
@@ -65,7 +65,7 @@ std::string VariableExpression::CountString() {
   if (variables_container.ExistsString(variable_name_)) {
     return variables_container.GetString(variable_name_);
   } else {
-    std::cerr << variable_name_  << " isn't declared in this scope" << std::endl;
+    std::cerr << variable_name_ << " isn't declared in this scope" << std::endl;
     exit(NOT_DECLARED_VARIABLE);
   }
 }
@@ -83,11 +83,13 @@ double LogicalExpression::Count() {
   }
 
   if (operation_ == "AND") {
-    assert(lhs_->GetType() != Type::T_STRING && rhs_->GetType() != Type::T_STRING);
+    assert(lhs_->GetType() != Type::T_STRING &&
+           rhs_->GetType() != Type::T_STRING);
     return static_cast<bool>(lhs_->Count()) && static_cast<bool>(rhs_->Count());
   }
   if (operation_ == "OR") {
-    assert(lhs_->GetType() != Type::T_STRING && rhs_->GetType() != Type::T_STRING);
+    assert(lhs_->GetType() != Type::T_STRING &&
+           rhs_->GetType() != Type::T_STRING);
     return static_cast<bool>(lhs_->Count()) || static_cast<bool>(rhs_->Count());
   }
   if (operation_ == "NOT") {

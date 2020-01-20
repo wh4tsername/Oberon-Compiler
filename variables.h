@@ -3,8 +3,8 @@
 #include <map>
 #include <string>
 
-#include "statements.h"
 #include "errors.h"
+#include "statements.h"
 
 class Statement;
 class ListOfStatements;

@@ -13,26 +13,16 @@ class Expression {
 
  public:
   virtual double Count() = 0;
-  virtual std::string CountString() {
-    return std::string();
-  }
+  virtual std::string CountString() { return std::string(); }
 
-  int GetType() {
-    return type_;
-  }
+  int GetType() { return type_; }
 
-  enum Type{
-    T_INT = 0,
-    T_REAL = 1,
-    T_BOOL = 2,
-    T_STRING = 3
-  };
+  enum Type { T_INT = 0, T_REAL = 1, T_BOOL = 2, T_STRING = 3 };
 };
 
 class ArithmeticExpression : public Expression {
  public:
-  ArithmeticExpression(std::string  operation, Expression* lhs,
-                       Expression* rhs)
+  ArithmeticExpression(std::string operation, Expression* lhs, Expression* rhs)
       : operation_(std::move(operation)), lhs_(lhs), rhs_(rhs) {}
 
   double Count() final;
@@ -45,9 +35,7 @@ class ArithmeticExpression : public Expression {
 
 class NumeralExpression : public Expression {
  public:
-  explicit NumeralExpression(int value) : value_(value) {
-    type_ = Type::T_INT;
-  }
+  explicit NumeralExpression(int value) : value_(value) { type_ = Type::T_INT; }
 
   double Count() final { return value_; }
 
@@ -80,8 +68,7 @@ class VariableExpression : public Expression {
 
 class LogicalExpression : public Expression {
  public:
-  LogicalExpression(std::string operation, Expression* lhs,
-                    Expression* rhs)
+  LogicalExpression(std::string operation, Expression* lhs, Expression* rhs)
       : operation_(std::move(operation)), lhs_(lhs), rhs_(rhs) {
     type_ = Type::T_BOOL;
   }

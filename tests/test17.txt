@@ -1,0 +1,22 @@
+15
+*****
+MODULE a;
+IMPORT;
+VAR
+    limit: INTEGER;
+    counter: INTEGER;
+    sum: INTEGER;
+BEGIN
+
+counter := 5;
+sum := 0;
+
+WHILE (counter)
+DO
+sum := sum + counter;
+counter := counter - 1;
+END;
+
+PRINT sum;
+
+END a.

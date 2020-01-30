@@ -34,6 +34,16 @@ void IfStatement::Run() {
   }
 }
 
+void WhileStatement::Run() {
+  if (!expression_) {
+    exit(NULL_POINTER_ERROR);
+  }
+
+  while (static_cast<bool>(expression_->Count())) {
+    statements_->Run();
+  }
+}
+
 void AssignStatement::Run() {
   if (expression_) {
     if (expression_->GetType() == Expression::Type::T_STRING) {

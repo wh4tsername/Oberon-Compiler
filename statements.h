@@ -51,6 +51,17 @@ class IfStatement : public Statement {
   ListOfStatements* second_statement_;
 };
 
+class WhileStatement : public Statement {
+ public:
+  explicit WhileStatement(Expression* expression, ListOfStatements* statements)
+      : expression_(expression), statements_(statements) {}
+  void Run() final;
+
+ private:
+  Expression* expression_;
+  ListOfStatements* statements_;
+};
+
 class AssignStatement : public Statement {
   std::string variable_name_;
   Expression* expression_;

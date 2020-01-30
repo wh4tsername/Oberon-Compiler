@@ -3,8 +3,6 @@
     #include <stdlib.h>
 
     #include "declaration.h"
-    #include "expressions.h"
-    #include "variables.h"
     #include "statements.h"
 
     #define YYERROR_VERBOSE 1
@@ -38,6 +36,8 @@
 %token IF
 %token THEN
 %token ELSE
+%token DO
+%token WHILE
 %token MODULE
 %token IMPORT
 %token VAR
@@ -54,6 +54,7 @@
 %type <list> statement_sequence
 %type <statement> statement
 %type <statement> if_statement
+%type <statement> while_statement
 
 %%
 
@@ -91,6 +92,7 @@ statement:
 	| IDENT ASSIGNMENT_SYMBOL logic_expression {$$ = new AssignStatement($1, $3);}
         | PRINT logic_expression {$$ = new PrintStatement($2);}
 	| if_statement {$$ = $1;}
+	| while_statement {$$ = $1;}
 	| {};
 
 if_statement:
@@ -98,6 +100,10 @@ if_statement:
 	| IF '(' logic_expression ')' THEN delimeter statement_sequence ELSE delimeter statement_sequence END {$$ = new IfStatement($3, $7, $10);};
 	| IF '(' expression ')' THEN delimeter statement_sequence END {$$ = new IfStatement($3, $7, NULL);}
         | IF '(' expression ')' THEN delimeter statement_sequence ELSE delimeter statement_sequence END {$$ = new IfStatement($3, $7, $10);};
+
+while_statement:
+	WHILE '(' logic_expression ')' DO statement_sequence END {$$ = new WhileStatement($3, $6);}
+	| WHILE '(' expression ')' DO statement_sequence END {$$ = new WhileStatement($3, $6);}
 
 logic_expression: 
 	expression '<' expression {$$ = new LogicalExpression("<", $1, $3);}

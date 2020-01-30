@@ -22,3 +22,9 @@ oberon.dot
 oberon.output
 
 outfile.ps
+
+lex.yy.c
+
+oberon.tab.c
+
+oberon.tab.h

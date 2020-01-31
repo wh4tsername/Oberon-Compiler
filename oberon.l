@@ -24,6 +24,8 @@ REAL (([1-9][0-9]*)|0)\.[0-9]*
 "ELSE"      { return ELSE; }
 "DO"        { return DO; }
 "WHILE"     { return WHILE; }
+"REPEAT"    { return REPEAT; }
+"UNTIL"     { return UNTIL; }
 "INTEGER"   { return T_INTEGER; }
 "REAL"      { return T_REAL; }
 "BOOL"      { return T_BOOL; }
@@ -42,6 +44,7 @@ REAL (([1-9][0-9]*)|0)\.[0-9]*
 "-"         { return '-'; }
 "/"         { return '/'; }
 "*"         { return '*'; }
+"MOD"       { return MOD; }
 "("         { return '('; }
 ")"         { return ')'; }
 " "         { /* space - do nothing */ }

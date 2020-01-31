@@ -21,7 +21,7 @@
 }
 
 %left '+' '-'
-%left '*' '/'
+%left '*' '/' MOD
 %left T_LE T_GE
 %left T_OR
 %left T_AND
@@ -38,6 +38,8 @@
 %token ELSE
 %token DO
 %token WHILE
+%token REPEAT
+%token UNTIL
 %token MODULE
 %token IMPORT
 %token VAR
@@ -48,6 +50,7 @@
 %token T_LE T_GE
 %token T_AND T_OR T_NOT
 %token T_TRUE T_FALSE
+%token MOD
 
 %type <expression> expression
 %type <logical_expression> logic_expression
@@ -55,6 +58,7 @@
 %type <statement> statement
 %type <statement> if_statement
 %type <statement> while_statement
+%type <statement> do_statement
 
 %%
 
@@ -93,6 +97,7 @@ statement:
         | PRINT logic_expression {$$ = new PrintStatement($2);}
 	| if_statement {$$ = $1;}
 	| while_statement {$$ = $1;}
+	| do_statement {$$ = $1;}
 	| {};
 
 if_statement:
@@ -104,6 +109,10 @@ if_statement:
 while_statement:
 	WHILE '(' logic_expression ')' DO statement_sequence END {$$ = new WhileStatement($3, $6);}
 	| WHILE '(' expression ')' DO statement_sequence END {$$ = new WhileStatement($3, $6);}
+
+do_statement:
+	REPEAT statement_sequence UNTIL '(' logic_expression ')' {$$ = new DoStatement($5, $2);}
+	| REPEAT statement_sequence UNTIL '(' expression ')' {$$ = new DoStatement($5, $2);}
 
 logic_expression: 
 	expression '<' expression {$$ = new LogicalExpression("<", $1, $3);}
@@ -136,6 +145,7 @@ expression:
 	| expression '-' expression {$$ = new ArithmeticExpression("-", $1, $3);}
 	| expression '*' expression {$$ = new ArithmeticExpression("*", $1, $3);}
 	| expression '/' expression {$$ = new ArithmeticExpression("/", $1, $3);}
+	| expression MOD expression {$$ = new ArithmeticExpression("%", $1, $3);}
 	| '(' expression ')' {$$ = $2;}
 	;
 %%

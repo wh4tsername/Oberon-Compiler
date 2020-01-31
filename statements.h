@@ -62,6 +62,17 @@ class WhileStatement : public Statement {
   ListOfStatements* statements_;
 };
 
+class DoStatement : public Statement {
+ public:
+  explicit DoStatement(Expression* expression, ListOfStatements* statements)
+      : expression_(expression), statements_(statements) {}
+  void Run() final;
+
+ private:
+  Expression* expression_;
+  ListOfStatements* statements_;
+};
+
 class AssignStatement : public Statement {
   std::string variable_name_;
   Expression* expression_;

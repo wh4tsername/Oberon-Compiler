@@ -4,7 +4,7 @@ make
 
 cd tests || exit
 
-number_of_tests=17
+number_of_tests=20
 for ((i = 1; i <= $number_of_tests; i++))
 do
 	tail -n +3 test$i.txt > test.txt

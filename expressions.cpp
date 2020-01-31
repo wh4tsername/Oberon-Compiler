@@ -23,7 +23,25 @@ double ArithmeticExpression::Count() {
       std::cerr << "Runtime error: division by zero" << std::endl;
       exit(RUNTIME_ERROR);
     }
+
     return lhs_value / rhs_value;
+  }
+  if (operation_ == "%") {
+    if (lhs_->GetType() != T_INT || rhs_->GetType() != T_INT) {
+      std::cerr << "Runtime error: operation is valid only with integer type"
+                << std::endl;
+      exit(USAGE_ERROR);
+    }
+
+    int lhs_int_value = static_cast<int>(lhs_->Count());
+    int rhs_int_value = static_cast<int>(rhs_->Count());
+
+    if (rhs_int_value == 0) {
+      std::cerr << "Runtime error: division by zero" << std::endl;
+      exit(RUNTIME_ERROR);
+    }
+
+    return lhs_int_value % rhs_int_value;
   }
   if (operation_ == "@") {
     return -lhs_value;

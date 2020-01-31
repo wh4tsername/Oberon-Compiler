@@ -73,7 +73,7 @@ import_list:
 	{};
 
 declaration_sequence: 
-	declaration_sequence declaration ';' delimeter {}
+	declaration_sequence declaration ';' {}
 	| {};
 
 declaration:
@@ -83,12 +83,8 @@ declaration:
         | IDENT ':' T_STRING {variables_container.Add($1, "string");};
 
 statement_sequence: 
-	statement_sequence statement ';' delimeter {$1->Add($2);  $$ = $1;}
+	statement_sequence statement ';' {$1->Add($2);  $$ = $1;}
 	| {$$ = new ListOfStatements;};
-
-delimeter:
-	delimeter '\n' {}
-	| {};
 
 statement: 
 	IDENT ASSIGNMENT_SYMBOL expression {$$ = new AssignStatement($1, $3);}
@@ -101,10 +97,10 @@ statement:
 	| {};
 
 if_statement:
-	IF '(' logic_expression ')' THEN delimeter statement_sequence END {$$ = new IfStatement($3, $7, NULL);}
-	| IF '(' logic_expression ')' THEN delimeter statement_sequence ELSE delimeter statement_sequence END {$$ = new IfStatement($3, $7, $10);};
-	| IF '(' expression ')' THEN delimeter statement_sequence END {$$ = new IfStatement($3, $7, NULL);}
-        | IF '(' expression ')' THEN delimeter statement_sequence ELSE delimeter statement_sequence END {$$ = new IfStatement($3, $7, $10);};
+	IF '(' logic_expression ')' THEN statement_sequence END {$$ = new IfStatement($3, $6, NULL);}
+	| IF '(' logic_expression ')' THEN statement_sequence ELSE statement_sequence END {$$ = new IfStatement($3, $6, $8);};
+	| IF '(' expression ')' THEN statement_sequence END {$$ = new IfStatement($3, $6, NULL);}
+        | IF '(' expression ')' THEN statement_sequence ELSE statement_sequence END {$$ = new IfStatement($3, $6, $8);};
 
 while_statement:
 	WHILE '(' logic_expression ')' DO statement_sequence END {$$ = new WhileStatement($3, $6);}

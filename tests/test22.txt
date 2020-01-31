@@ -1,0 +1,12 @@
+?asdqwe f
+*****
+MODULE str;
+IMPORT;
+VAR
+    s1: STRING;
+    s2: STRING;
+BEGIN
+    s1 := "asd";
+    s2 := "qwe";
+    PRINT "?" CON (s1 CON s2) CON " " CON "f";
+END str.

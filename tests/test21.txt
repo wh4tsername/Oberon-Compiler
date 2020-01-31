@@ -1,0 +1,10 @@
+asd
+*****
+MODULE str;
+IMPORT;
+VAR
+    s: STRING;
+BEGIN
+    s := "asd";
+    PRINT s;
+END str.

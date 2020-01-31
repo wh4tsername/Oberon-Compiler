@@ -15,6 +15,8 @@ void PrintStatement::Run() {
 
   if (expression_->GetType() == Expression::T_BOOL) {
     std::cout << (static_cast<bool>(expression_->Count()) ? "true" : "false");
+  } else if (expression_->GetType() == Expression::T_STRING) {
+    std::cout << expression_->CountString();
   } else {
     std::cout << expression_->Count();
   }

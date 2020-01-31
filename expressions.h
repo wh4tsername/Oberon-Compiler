@@ -12,7 +12,7 @@ class Expression {
   int type_;
 
  public:
-  virtual double Count() = 0;
+  virtual double Count() { return 0; };
   virtual std::string CountString() { return std::string(); }
 
   int GetType() { return type_; }
@@ -79,4 +79,38 @@ class LogicalExpression : public Expression {
   std::string operation_;
   Expression* lhs_;
   Expression* rhs_;
+};
+
+class StringExpression : public Expression {
+ public:
+  explicit StringExpression(std::string operation, std::string str,
+                            Expression* left, Expression* right)
+      : operation_(std::move(operation)),
+        variable_name_(std::move(str)),
+        lhs_(left),
+        rhs_(right) {
+    type_ = Type::T_STRING;
+  }
+
+  explicit StringExpression(std::string operation, Expression* lhs,
+                            Expression* rhs)
+      : operation_(std::move(operation)), lhs_(lhs), rhs_(rhs) {
+    type_ = Type::T_STRING;
+  }
+
+  explicit StringExpression(const std::string& str)
+      : result_string_(std::move(str.substr(1, str.size() - 2))),
+        lhs_(nullptr),
+        rhs_(nullptr) {
+    type_ = Type::T_STRING;
+  }
+
+  std::string CountString() final;
+
+ private:
+  std::string operation_;
+  Expression* lhs_;
+  Expression* rhs_;
+  std::string result_string_;
+  std::string variable_name_;
 };

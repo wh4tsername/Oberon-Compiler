@@ -1,0 +1,12 @@
+asdqweasd
+*****
+MODULE str;
+IMPORT;
+VAR
+    s1: STRING;
+    s2: STRING;
+BEGIN
+    s1 := "asd";
+    s2 := "qwe";
+    PRINT s1[:] CON s2[:] CON s1[:];
+END str.

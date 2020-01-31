@@ -1,0 +1,14 @@
+sad cat acts sadly
+*****
+MODULE str;
+IMPORT;
+VAR
+    s1: STRING;
+    s2: STRING;
+    s3: STRING;
+BEGIN
+    s1 := "asd";
+    s2 := "act";
+    s3 := "@ly#";
+    PRINT (s1[1:2] CON s2[:1] CON s1[2:]) CON " " CON (s2[1:2] CON s2[0:1] CON s2[2:3]) CON " " CON (s2[:] CON s1[1:2]) CON " " CON ("sad" CON s3[1:3]);
+END str.

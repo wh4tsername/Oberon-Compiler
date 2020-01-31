@@ -1,0 +1,26 @@
+26
+*****
+MODULE a;
+IMPORT;
+VAR
+    limit: INTEGER;
+    counter: INTEGER;
+    flag: BOOL;
+BEGIN
+
+counter := 15;
+limit := 40;
+flag := FALSE;
+
+REPEAT
+    IF (counter MOD 13 = 0)
+    THEN
+        counter := counter - 1;
+        flag := TRUE;
+    END;
+    counter := counter + 1;
+UNTIL (NOT flag);
+
+PRINT counter;
+
+END a.

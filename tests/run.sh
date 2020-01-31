@@ -1,10 +1,10 @@
-cd ../
+cd ../ || exit
 
 make
 
-cd tests
+cd tests || exit
 
-number_of_tests=15
+number_of_tests=25
 for ((i = 1; i <= $number_of_tests; i++))
 do
 	tail -n +3 test$i.txt > test.txt

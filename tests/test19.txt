@@ -1,0 +1,25 @@
+1
+*****
+MODULE gcd;
+IMPORT;
+VAR
+    a: INTEGER;
+    b: INTEGER;
+    t: INTEGER;
+BEGIN
+
+a := 1133;
+b := 15252;
+
+WHILE (b)
+DO
+    a := a MOD b;
+
+    t := a;
+    a := b;
+    b := t;
+END;
+
+PRINT a;
+
+END gcd.

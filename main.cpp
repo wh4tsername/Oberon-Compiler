@@ -1,11 +1,11 @@
 #include <iostream>
 
+#include "declaration.h"
 #include "errors.h"
 #include "statements.h"
 
 extern int yylex();
 extern int yylineno;
-extern void yyparse();
 extern FILE* yyin;
 
 ListOfStatements* program;

@@ -1,0 +1,20 @@
+kitten is hungry
+*****
+MODULE str;
+IMPORT;
+VAR
+    s: STRING;
+    i: INTEGER;
+    result: STRING;
+BEGIN
+    s := "kitten is hungry";
+    i := 0;
+    result := "";
+    WHILE (i < 16)
+    DO
+        result := result CON s[i:i + 1];
+        i := i + 1;
+    END;
+
+    PRINT result;
+END str.
